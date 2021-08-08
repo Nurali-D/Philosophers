@@ -2,12 +2,12 @@ NAME		=	philo
 HEAD		=	includes/
 OBJS_FOLD	=	objects/
 SRCS_FOLD	=	sources/
-SRCS_FILES	=	main.c
+SRCS_FILES	=	main.c utils.c simulation.c time.c init.c
 SRCS		=	$(addprefix $(SRCS_FOLD), $(SRCS_FILES))
 OBJS_FILES	=	$(patsubst %.c, %.o, $(SRCS_FILES))
 OBJS		=	$(addprefix $(OBJS_FOLD),$(OBJS_FILES))
 RM			=	rm -rf
-CC			=	gcc
+CC			=	gcc -g
 CFLAGS		=	-Wall -Wextra -Werror  -I $(HEAD)
 
 all: $(NAME)
@@ -18,7 +18,7 @@ $(NAME): $(OBJS_FOLD) $(OBJS) $(HEAD)
 $(OBJS_FOLD):
 	mkdir -p $(OBJS_FOLD)
 
-$(OBJS_FOLD)%.o : $(SRCS_FOLD)%.c  $(HEAD)
+$(OBJS_FOLD)%.o : $(SRCS_FOLD)%.c $(HEAD)/*.h Makefile
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
