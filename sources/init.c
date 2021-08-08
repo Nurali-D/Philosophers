@@ -6,7 +6,7 @@
 /*   By: ltulune <ltulune@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 11:24:47 by ltulune           #+#    #+#             */
-/*   Updated: 2021/08/08 11:30:11 by ltulune          ###   ########.fr       */
+/*   Updated: 2021/08/08 12:18:15 by ltulune          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_args(t_input *inp)
 {
-	if (inp->n_philosophers <= 0 || inp->time_to_die < 10
+	if (inp->n_philosophers <= 0 || inp->time_to_die < 60
 		|| inp->time_to_eat < 60 || inp->time_to_sleep < 60
 		|| inp->n_must_eat == 0 || inp->n_must_eat < -1)
 		return (1);

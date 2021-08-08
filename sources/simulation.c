@@ -6,11 +6,20 @@
 /*   By: ltulune <ltulune@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 11:23:03 by ltulune           #+#    #+#             */
-/*   Updated: 2021/08/08 11:23:06 by ltulune          ###   ########.fr       */
+/*   Updated: 2021/08/08 12:09:37 by ltulune          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	get_forks_eat(t_philo *ph)
+{
+	pthread_mutex_lock(&ph->forks[ph->left_fork]);
+	printf(FORK1, get_time() - ph->start_time, ph->id);
+	pthread_mutex_lock(&ph->forks[ph->right_fork]);
+	printf(FORK2, get_time() - ph->start_time, ph->id);
+	printf(EAT, get_time() - ph->start_time, ph->id);
+}
 
 void	*eat_think_sleep(t_philo *ph)
 {
@@ -21,11 +30,7 @@ void	*eat_think_sleep(t_philo *ph)
 		fix_usleep(ph->inp->time_to_eat / 2);
 	while (1)
 	{
-		pthread_mutex_lock(&ph->forks[ph->left_fork]);
-		printf(FORK1, get_time() - ph->start_time, ph->id);
-		pthread_mutex_lock(&ph->forks[ph->right_fork]);
-		printf(FORK2, get_time() - ph->start_time, ph->id);
-		printf(EAT, get_time() - ph->start_time, ph->id);
+		get_forks_eat(ph);
 		fix_usleep(ph->inp->time_to_eat);
 		pthread_mutex_unlock(&ph->forks[ph->left_fork]);
 		pthread_mutex_unlock(&ph->forks[ph->right_fork]);
